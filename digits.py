@@ -2,7 +2,6 @@
 import tensorflow as tf
 from tensorflow import keras
 
-print(tf.config.list_physical_devices('GPU'))
 # Load the mnist digits dataset
 mnist = keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
