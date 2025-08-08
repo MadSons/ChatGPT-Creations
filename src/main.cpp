@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
             for (int x = 0; x < WINDOW_WIDTH / TILE_SIZE + 2; ++x) {
                 int worldX = x * TILE_SIZE + ((int)cameraX % TILE_SIZE) - TILE_SIZE;
                 int worldY = y * TILE_SIZE;
-                bool dark = (( ( (worldX + cameraX) / TILE_SIZE) + y) % 2) == 0;
+                bool dark = ((((worldX + (int)cameraX) / TILE_SIZE) + y) % 2) == 0;
                 if (dark) SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
                 else SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
                 SDL_Rect tileRect { worldX - (int)cameraX, worldY, TILE_SIZE, TILE_SIZE };
