@@ -61,8 +61,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find or fetch SDL2 (+ image/ttf)
 find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_ttf REQUIRED)
+find_package(SDL2_image QUIET)
+find_package(SDL2_ttf QUIET)
 
 add_subdirectory(src)
 ```
@@ -73,7 +73,13 @@ add_subdirectory(src)
 file(GLOB ENGINE_SRC engine/*.cpp game/*.cpp)
 add_executable(platformer ${ENGINE_SRC} main.cpp)
 target_include_directories(platformer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(platformer PRIVATE SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf)
+target_link_libraries(platformer PRIVATE SDL2::SDL2 SDL2::SDL2main)
+if(SDL2_image_FOUND)
+  target_link_libraries(platformer PRIVATE SDL2_image::SDL2_image)
+endif()
+if(SDL2_ttf_FOUND)
+  target_link_libraries(platformer PRIVATE SDL2_ttf::SDL2_ttf)
+endif()
 ```
 
 ---
