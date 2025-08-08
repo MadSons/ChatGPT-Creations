@@ -14,12 +14,22 @@ bool Application::init(const Config& cfg) {
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     if (!m_renderer) return false;
 
-    // load level
-    if (!m_map.loadFromCSV("assets/levels/level1.csv")) return false;
-
+    m_levels = {"assets/levels/level1.csv", "assets/levels/level2.csv", "assets/levels/level3.csv"};
     m_camera = Camera(cfg.width, cfg.height);
-    m_player.position = {64.0f, 64.0f};
+    if (!loadLevel(m_levels[0])) return false;
     m_running = true;
+    return true;
+}
+
+bool Application::loadLevel(const std::string& path) {
+    if (!m_map.loadFromCSV(path.c_str())) return false;
+    m_player.position = {64.0f, 64.0f};
+    m_player.kinematics.vx = 0.0f;
+    m_player.kinematics.vy = 0.0f;
+    m_player.grounded = false;
+    m_player.canDoubleJump = false;
+    constexpr int tileSize = 32;
+    m_camera.follow(m_player.position, m_map.width() * tileSize, m_map.height() * tileSize);
     return true;
 }
 
@@ -55,6 +65,17 @@ void Application::processEvents() {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) m_running = false;
+        if (e.type == SDL_KEYDOWN) {
+            int idx = -1;
+            switch (e.key.keysym.sym) {
+                case SDLK_1: idx = 0; break;
+                case SDLK_2: idx = 1; break;
+                case SDLK_3: idx = 2; break;
+            }
+            if (idx >= 0 && idx < static_cast<int>(m_levels.size())) {
+                if (loadLevel(m_levels[idx])) m_currentLevel = idx;
+            }
+        }
         m_input.handleEvent(e);
     }
     m_input.update();
