@@ -9,6 +9,7 @@ struct SDL_Renderer;
 #include "game/Player.hpp"
 #include "game/TileMap.hpp"
 #include "game/Physics.hpp"
+#include "Camera.hpp"
 
 // Main application managing the game loop.
 class Application {
@@ -31,6 +32,7 @@ private:
     Player m_player;
     TileMap m_map;
     Physics m_physics;
+    Camera m_camera{800, 600};
 };
 
 #endif // APPLICATION_HPP

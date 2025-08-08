@@ -17,6 +17,7 @@ bool Application::init(const Config& cfg) {
     // load level
     if (!m_map.loadFromCSV("assets/levels/level1.csv")) return false;
 
+    m_camera = Camera(cfg.width, cfg.height);
     m_player.position = {64.0f, 64.0f};
     m_running = true;
     return true;
@@ -60,7 +61,8 @@ void Application::processEvents() {
 }
 
 void Application::fixedUpdate(float dt) {
-    const float moveSpeed = 200.0f;
+    const float baseSpeed = 200.0f;
+    const float moveSpeed = m_input.run ? baseSpeed * 1.75f : baseSpeed;
     if (m_input.left)
         m_player.kinematics.vx = -moveSpeed;
     else if (m_input.right)
@@ -68,12 +70,21 @@ void Application::fixedUpdate(float dt) {
     else
         m_player.kinematics.vx = 0.0f;
 
-    if (m_input.jumpPressed && m_player.grounded) {
-        m_player.kinematics.vy = -550.0f;
-        m_player.grounded = false;
+    if (m_input.jumpPressed) {
+        if (m_player.grounded) {
+            m_player.kinematics.vy = -550.0f;
+            m_player.grounded = false;
+        } else if (m_player.canDoubleJump) {
+            m_player.kinematics.vy = -550.0f;
+            m_player.canDoubleJump = false;
+        }
     }
 
     m_physics.step(m_player, m_map, dt);
+    if (m_player.grounded) m_player.canDoubleJump = true;
+
+    constexpr int tileSize = 32;
+    m_camera.follow(m_player.position, m_map.width() * tileSize, m_map.height() * tileSize);
 }
 
 void Application::variableUpdate(float /*dt*/) {}
@@ -85,10 +96,16 @@ void Application::render(float /*alpha*/) {
     // draw tiles
     SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
     const int tileSize = 32;
-    for (int y = 0; y < m_map.height(); ++y) {
-        for (int x = 0; x < m_map.width(); ++x) {
+    int camX = static_cast<int>(m_camera.position().x);
+    int camY = static_cast<int>(m_camera.position().y);
+    int startX = camX / tileSize;
+    int startY = camY / tileSize;
+    int endX = (camX + m_camera.width() + tileSize - 1) / tileSize;
+    int endY = (camY + m_camera.height() + tileSize - 1) / tileSize;
+    for (int y = startY; y < endY; ++y) {
+        for (int x = startX; x < endX; ++x) {
             if (m_map.isSolid(x, y)) {
-                SDL_Rect r{ x * tileSize, y * tileSize, tileSize, tileSize };
+                SDL_Rect r{ x * tileSize - camX, y * tileSize - camY, tileSize, tileSize };
                 SDL_RenderFillRect(m_renderer, &r);
             }
         }
@@ -96,7 +113,7 @@ void Application::render(float /*alpha*/) {
 
     // draw player
     SDL_SetRenderDrawColor(m_renderer, 200, 0, 0, 255);
-    SDL_Rect pr{ static_cast<int>(m_player.position.x), static_cast<int>(m_player.position.y),
+    SDL_Rect pr{ static_cast<int>(m_player.position.x - camX), static_cast<int>(m_player.position.y - camY),
                  static_cast<int>(m_player.width), static_cast<int>(m_player.height) };
     SDL_RenderFillRect(m_renderer, &pr);
 

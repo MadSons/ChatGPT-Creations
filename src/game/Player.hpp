@@ -8,6 +8,7 @@
 struct Player : public Entity {
     Kinematics kinematics;
     bool grounded{false};
+    bool canDoubleJump{true};
     float width{32.0f};
     float height{32.0f};
 };

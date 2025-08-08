@@ -4,7 +4,7 @@
 #include <SDL.h>
 
 // Handles keyboard input state and SDL keyboard events.
-// Tracks left/right movement and jumping.
+// Tracks left/right movement, jumping, and running.
 class Input {
 public:
     // Update internal edge-triggered states (e.g., jumpPressed).
@@ -13,10 +13,11 @@ public:
     // Process SDL keyboard events.
     void handleEvent(const SDL_Event& e);
 
-    bool left{false};   // true while 'A' held
-    bool right{false};  // true while 'S' held
-    bool jump{false};   // true while SPACE held
+    bool left{false};    // true while 'A' held
+    bool right{false};   // true while 'D' held
+    bool jump{false};    // true while SPACE held
     bool jumpPressed{false}; // true on the frame jump becomes pressed
+    bool run{false};     // true while LEFT SHIFT held
 
 private:
     bool m_prevJump{false};

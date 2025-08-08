@@ -6,8 +6,9 @@ void Input::handleEvent(const SDL_Event& e) {
         bool pressed = e.type == SDL_KEYDOWN;
         switch (e.key.keysym.sym) {
             case SDLK_a: left = pressed; break;
-            case SDLK_s: right = pressed; break;
+            case SDLK_d: right = pressed; break;
             case SDLK_SPACE: jump = pressed; break;
+            case SDLK_LSHIFT: run = pressed; break;
         }
     }
 }
