@@ -11,5 +11,6 @@ pkg_check_modules(SDL2 REQUIRED sdl2)
 include_directories(${SDL2_INCLUDE_DIRS} include)
 link_directories(${SDL2_LIBRARY_DIRS})
 
+
 add_executable(platformer src/main.cpp)
 target_link_libraries(platformer ${SDL2_LIBRARIES})
