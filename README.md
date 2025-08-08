@@ -19,7 +19,7 @@ This repository provides a scaffold for a 2D platformer built in modern C++ usin
 Ensure SDL2 is installed on your system. Image and TTF support are optional and will be enabled automatically if the development packages are available. On Debian/Ubuntu:
 
 ```
-sudo apt-get install libsdl2-dev # optional: libsdl2-image-dev libsdl2-ttf-dev
+sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
 ```
 
 Then build the demo:
@@ -27,7 +27,7 @@ Then build the demo:
 ```
 cmake -S . -B build
 cmake --build build
-./build/platformer
+./build/src/platformer
 ```
 
-The application creates an 800×600 window, clears it to black, and exits after a short delay.
+The executable is placed under `build/src/`. Running it creates an 800×600 window, clears it to black, and exits after a short delay.

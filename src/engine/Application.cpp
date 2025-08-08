@@ -1,9 +1,9 @@
 #include "Application.hpp"
 #include "Config.hpp"
 #include "Input.hpp"
-#include "Player.hpp"
-#include "TileMap.hpp"
-#include "Physics.hpp"
+#include "game/Player.hpp"
+#include "game/TileMap.hpp"
+#include "game/Physics.hpp"
 
 #include <SDL.h>
 
