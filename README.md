@@ -9,7 +9,7 @@ This repository provides a scaffold for a 2D platformer built in modern C++ usin
   - `CMakeLists.txt` – build rules for the executable.
 - `assets/`
     - `tilesets/` – tile graphics.
-    - `levels/` – level data (`level1.csv` now spans multiple screens and scrolls with the camera).
+    - `levels/` – level data (`level1.csv`, `level2.csv`, and `level3.csv`).
     - `sprites/` – character and object sprites.
 - `external/` – optional third‑party dependencies.
 - `tests/` – placeholder for unit tests.
@@ -30,4 +30,4 @@ cmake --build build
 ./build/src/platformer
 ```
 
-The executable is placed under `build/src/`. Running it creates an 800×600 window with a side‑scrolling level. Use **A/D** to move, **SPACE** to jump (with a double jump), and hold **Left Shift** to sprint.
+The executable is placed under `build/src/`. Running it creates an 800×600 window with a side‑scrolling level. Use **A/D** to move, **SPACE** to jump (with a double jump), and hold **Left Shift** to sprint. Press **1**, **2**, or **3** at any time to load the corresponding level.

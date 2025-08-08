@@ -5,6 +5,9 @@ class Config;
 struct SDL_Window;
 struct SDL_Renderer;
 
+#include <string>
+#include <vector>
+
 #include "Input.hpp"
 #include "game/Player.hpp"
 #include "game/TileMap.hpp"
@@ -24,6 +27,8 @@ private:
     void variableUpdate(float dt);
     void render(float alpha);
 
+    bool loadLevel(const std::string& path);
+
     SDL_Window* m_window{nullptr};
     SDL_Renderer* m_renderer{nullptr};
     bool m_running{false};
@@ -33,6 +38,8 @@ private:
     TileMap m_map;
     Physics m_physics;
     Camera m_camera{800, 600};
+    std::vector<std::string> m_levels;
+    int m_currentLevel{0};
 };
 
 #endif // APPLICATION_HPP
