@@ -11,6 +11,9 @@ This repository begins a simple 2D platformer built from scratch in C++ using SD
 - `CMakeLists.txt` – build configuration using CMake.
 - `.gitignore` – ignores build artifacts and binaries.
 
+## Architecture
+The engine is structured with a `Game` class managing levels and the main loop. `Player`, `Level`, `Ability`, `Item`, and `Stats` classes provide an object-oriented framework to support multiple levels, character abilities, inventory items, and statistics as the project grows.
+
 ## Build Instructions
 Ensure SDL2 development libraries and `pkg-config` are installed on your system.
 For example, on Debian/Ubuntu:
