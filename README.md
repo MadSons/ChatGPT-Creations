@@ -1,39 +1,33 @@
 # C++ Platformer Prototype
 
-This repository begins a simple 2D platformer built from scratch in C++ using SDL2. The initial demo opens a window with a checkerboard background and a controllable rectangle character standing on a ground line. The camera follows the player to create a scrolling effect.
+This repository provides a scaffold for a 2D platformer built in modern C++ using SDL2. The current demo simply opens a window and clears the screen; the project structure is arranged to grow into a full engine.
 
 ## Directory Structure
-- `src/` – C++ source files.
-- `include/` – header files and utilities.
+- `src/`
+  - `engine/` – core engine systems (application, renderer, etc.).
+  - `game/` – gameplay code such as scenes, entities, and physics.
+  - `CMakeLists.txt` – build rules for the executable.
 - `assets/`
+  - `tilesets/` – tile graphics.
+  - `levels/` – level data.
   - `sprites/` – character and object sprites.
-  - `backgrounds/` – background images and tiles.
-- `CMakeLists.txt` – build configuration using CMake.
-- `.gitignore` – ignores build artifacts and binaries.
-
-## Architecture
-The engine is structured with a `Game` class managing levels and the main loop. `Player`, `Level`, `Ability`, `Item`, and `Stats` classes provide an object-oriented framework to support multiple levels, character abilities, inventory items, and statistics as the project grows.
+- `external/` – optional third‑party dependencies.
+- `tests/` – placeholder for unit tests.
+- `CMakeLists.txt` – top‑level build configuration.
 
 ## Build Instructions
-Ensure SDL2 development libraries and `pkg-config` are installed on your system.
-For example, on Debian/Ubuntu:
+Ensure SDL2 along with its image and ttf extensions are installed on your system. On Debian/Ubuntu:
 
 ```
-sudo apt-get install libsdl2-dev pkg-config
+sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
 ```
 
 Then build the demo:
 
 ```
-mkdir build && cd build
-cmake ..
-make
-./platformer
+cmake -S . -B build
+cmake --build build
+./build/platformer
 ```
 
-## Controls
-- **A** – move left
-- **D** – move right
-- **Space** – jump
-
-Compile with `-DDEBUG` to enable simple logging via the `LOG` macro.
+The application creates an 800×600 window, clears it to black, and exits after a short delay.
