@@ -12,5 +12,5 @@ include_directories(${SDL2_INCLUDE_DIRS} include)
 link_directories(${SDL2_LIBRARY_DIRS})
 
 
-add_executable(platformer src/main.cpp)
+add_executable(platformer src/main.cpp src/Game.cpp src/Player.cpp src/Level.cpp)
 target_link_libraries(platformer ${SDL2_LIBRARIES})
