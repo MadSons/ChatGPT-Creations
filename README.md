@@ -1,6 +1,6 @@
 # C++ Platformer Prototype
 
-This repository provides a scaffold for a 2D platformer built in modern C++ using SDL2. The current demo simply opens a window and clears the screen; the project structure is arranged to grow into a full engine.
+This repository provides a scaffold for a 2D platformer built in modern C++ using SDL2. The demo now features a controllable player, scrolling level, and basic physics.
 
 ## Directory Structure
 - `src/`
@@ -9,7 +9,7 @@ This repository provides a scaffold for a 2D platformer built in modern C++ usin
   - `CMakeLists.txt` – build rules for the executable.
 - `assets/`
     - `tilesets/` – tile graphics.
-    - `levels/` – level data (`level1.csv` provides a simple ground and floating platform).
+    - `levels/` – level data (`level1.csv` now spans multiple screens and scrolls with the camera).
     - `sprites/` – character and object sprites.
 - `external/` – optional third‑party dependencies.
 - `tests/` – placeholder for unit tests.
@@ -30,4 +30,4 @@ cmake --build build
 ./build/src/platformer
 ```
 
-The executable is placed under `build/src/`. Running it creates an 800×600 window, clears it to black, and exits after a short delay.
+The executable is placed under `build/src/`. Running it creates an 800×600 window with a side‑scrolling level. Use **A/D** to move, **SPACE** to jump (with a double jump), and hold **Left Shift** to sprint.
