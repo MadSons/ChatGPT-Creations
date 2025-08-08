@@ -12,6 +12,15 @@ This repository begins a simple 2D platformer built from scratch in C++ using SD
 - `.gitignore` – ignores build artifacts and binaries.
 
 ## Build Instructions
+Ensure SDL2 development libraries and `pkg-config` are installed on your system.
+For example, on Debian/Ubuntu:
+
+```
+sudo apt-get install libsdl2-dev pkg-config
+```
+
+Then build the demo:
+
 ```
 mkdir build && cd build
 cmake ..
