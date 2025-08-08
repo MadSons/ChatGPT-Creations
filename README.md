@@ -8,9 +8,9 @@ This repository provides a scaffold for a 2D platformer built in modern C++ usin
   - `game/` – gameplay code such as scenes, entities, and physics.
   - `CMakeLists.txt` – build rules for the executable.
 - `assets/`
-  - `tilesets/` – tile graphics.
-  - `levels/` – level data.
-  - `sprites/` – character and object sprites.
+    - `tilesets/` – tile graphics.
+    - `levels/` – level data (`level1.csv` provides a simple ground and floating platform).
+    - `sprites/` – character and object sprites.
 - `external/` – optional third‑party dependencies.
 - `tests/` – placeholder for unit tests.
 - `CMakeLists.txt` – top‑level build configuration.
