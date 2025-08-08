@@ -1,7 +1,9 @@
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
-// Handles keyboard input state.
+#include <SDL.h>
+
+// Handles keyboard input state and SDL keyboard events.
 // Tracks left/right movement and jumping.
 class Input {
 public:
@@ -9,7 +11,7 @@ public:
     void update();
 
     // Process SDL keyboard events.
-    void handleEvent(const struct SDL_Event& e);
+    void handleEvent(const SDL_Event& e);
 
     bool left{false};   // true while 'A' held
     bool right{false};  // true while 'S' held
